@@ -26,7 +26,9 @@ app.get("/", (req, res) => {
 });
 
 import contentRouter from "./routes/content.routes.js";
+import adminRouter from "./routes/admin.routes.js";
 app.use("/api/v1/content", contentRouter);
+app.use("/api/v1/admin", adminRouter);
 
 app.use(errorHandler);
 
