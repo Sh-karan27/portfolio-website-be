@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { getPortfolioContent, updateSection } from "../controllers/content.controller.js";
+import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
@@ -8,15 +9,14 @@ const router = Router();
 router.get("/", getPortfolioContent);
 
 // One PUT per section — the admin panel calls these individually.
-// TODO: put an auth middleware in front of these once admin login exists.
-router.put("/hero", updateSection("hero"));
-router.put("/about", updateSection("about"));
-router.put("/skills", updateSection("skills"));
-router.put("/experience", updateSection("experience"));
-router.put("/projects", updateSection("projects"));
-router.put("/education", updateSection("education"));
-router.put("/contact", updateSection("contact"));
-router.put("/footer", updateSection("footer"));
-router.put("/social-links", updateSection("social-links"));
+router.put("/hero", verifyJWT, updateSection("hero"));
+router.put("/about", verifyJWT, updateSection("about"));
+router.put("/skills", verifyJWT, updateSection("skills"));
+router.put("/experience", verifyJWT, updateSection("experience"));
+router.put("/projects", verifyJWT, updateSection("projects"));
+router.put("/education", verifyJWT, updateSection("education"));
+router.put("/contact", verifyJWT, updateSection("contact"));
+router.put("/footer", verifyJWT, updateSection("footer"));
+router.put("/social-links", verifyJWT, updateSection("social-links"));
 
 export default router;
