@@ -89,35 +89,17 @@ export const DEFAULT_CONTENT = {
     items: [
       {
         number: "01",
-        title: "HRMS Component System",
+        title: "Tour & Travel Website",
+        slug: "tour-and-travel-website",
         description:
-          "Shared React + TypeScript component library across 3 client configs of a production HRMS.",
-        stack: "React · TypeScript · Design System",
-        link: "https://github.com/Sh-karan27",
-      },
-      {
-        number: "02",
-        title: "Clinic Management Dashboard",
-        description:
-          "Multi-role clinic platform — Admin / Doctor / Patient dashboards with route-level RBAC.",
-        stack: "React · TypeScript · RBAC · Vite",
-        link: "https://github.com/Sh-karan27",
-      },
-      {
-        number: "03",
-        title: "Field Tracking Mobile App",
-        description:
-          "React Native (WebView) app with background GPS — first signed production APK, shipped solo.",
-        stack: "React Native · Geolocation · Gradle",
-        link: "https://github.com/Sh-karan27",
-      },
-      {
-        number: "04",
-        title: "Next.js Marketing Site",
-        description:
-          "SSR + lazy-loaded marketing site — Lighthouse lifted from low-60s to high-70s over two sprints.",
-        stack: "Next.js · SSR · Performance",
-        link: "https://github.com/Sh-karan27",
+          "Responsive travel-booking site with destinations, services, and testimonials, animated with GSAP — built during my Vidya Intern Hub internship.",
+        stack: "React · Tailwind CSS · GSAP",
+        coverImage: "",
+        githubUrl: "https://github.com/Sh-karan27/tour-and-travel-vidyahubintern",
+        liveUrl: "https://tour-and-travel-vidyahubintern.vercel.app/",
+        hasBeforeAfter: false,
+        beforeImages: [],
+        afterImages: [],
       },
     ],
   },

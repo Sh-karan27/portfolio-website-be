@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getPortfolioContent, updateSection } from "../controllers/content.controller.js";
+import { getPortfolioContent, updateSection, getProjectBySlug } from "../controllers/content.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const router = Router();
@@ -7,6 +7,9 @@ const router = Router();
 // One GET for the whole portfolio — the frontend calls this once and
 // injects each section from the response.
 router.get("/", getPortfolioContent);
+
+// Single project lookup for the /projects/:slug details page.
+router.get("/projects/:slug", getProjectBySlug);
 
 // One PUT per section — the admin panel calls these individually.
 router.put("/hero", verifyJWT, updateSection("hero"));

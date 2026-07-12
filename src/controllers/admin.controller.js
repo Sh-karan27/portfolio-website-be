@@ -2,6 +2,7 @@ import { Admin } from "../models/admin.model.js";
 import { ApiError } from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
+import { getImageKit } from "../utils/imagekit.js";
 
 const cookieOptions = {
   httpOnly: true,
@@ -68,4 +69,14 @@ const loginAdmin = asyncHandler(async (req, res) => {
     );
 });
 
-export { registerAdmin, loginAdmin };
+// Signs a short-lived token so the admin panel can upload directly to
+// ImageKit from the browser — the file itself never passes through this
+// server. Gated behind verifyJWT so only a logged-in admin can obtain one.
+const getImageKitAuth = asyncHandler(async (req, res) => {
+  const authenticationParameters = getImageKit().getAuthenticationParameters();
+  return res
+    .status(200)
+    .json(new ApiResponse(200, authenticationParameters, "ImageKit auth issued"));
+});
+
+export { registerAdmin, loginAdmin, getImageKitAuth };

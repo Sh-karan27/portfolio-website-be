@@ -75,9 +75,15 @@ const projectItemSchema = new Schema(
   {
     number: { type: String, default: "" },
     title: { type: String, default: "" },
+    slug: { type: String, default: "" },
     description: { type: String, default: "" },
     stack: { type: String, default: "" },
-    link: { type: String, default: "" },
+    coverImage: { type: String, default: "" },
+    githubUrl: { type: String, default: "" },
+    liveUrl: { type: String, default: "" },
+    hasBeforeAfter: { type: Boolean, default: false },
+    beforeImages: { type: [String], default: [] },
+    afterImages: { type: [String], default: [] },
   },
   { _id: true }
 );
