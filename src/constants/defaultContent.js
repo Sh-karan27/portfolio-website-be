@@ -17,6 +17,7 @@ export const DEFAULT_CONTENT = {
     heading: "Full component lifecycle, end to end.",
     quote: "Comfortable from REST API integration to signed APK release.",
     bio: "I've built and maintained a shared component library across 3 client configurations of a production HRMS, written a custom Intersection Observer hook to cut network requests on heavy dashboards, and independently handled keystore setup and signed APK release for a company's first production mobile app. I write clean, testable code and adapt quickly in Agile teams.",
+    photoUrl: "",
     stats: [
       { value: "1+", label: "yrs in production" },
       { value: "3", label: "role-based dashboards" },

@@ -29,6 +29,7 @@ const aboutSchema = new Schema(
     heading: { type: String, default: "" },
     quote: { type: String, default: "" },
     bio: { type: String, default: "" },
+    photoUrl: { type: String, default: "" },
     stats: { type: [statSchema], default: [] },
   },
   { _id: false }
