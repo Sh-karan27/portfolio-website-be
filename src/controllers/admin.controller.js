@@ -4,10 +4,16 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { getImageKit } from "../utils/imagekit.js";
 
+// sameSite must be "none" in production: the admin panel calls this API
+// cross-origin (different domain from the frontend), and SameSite=Lax
+// cookies are dropped on cross-site fetch/XHR requests — only "none"
+// (which requires secure) is sent back on those. Lax stays fine for local
+// dev, where both run on http://localhost.
+const isProd = process.env.NODE_ENV === "production";
 const cookieOptions = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "lax",
+  secure: isProd,
+  sameSite: isProd ? "none" : "lax",
   maxAge: 15 * 60 * 1000, // matches ACCESS_TOKEN_EXPIRY (15m)
 };
 
