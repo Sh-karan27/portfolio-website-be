@@ -14,5 +14,8 @@ node_modules/
 # Editor
 .vscode
 
+# Vercel
+.vercel
+
 # OS
 .DS_Store

@@ -13,10 +13,12 @@ CMS API for [Karan Shukla's portfolio site](https://github.com/Sh-karan27/portfo
 ## Project Structure
 
 ```
+api/
+└── index.js                  # Vercel serverless entry — reuses the Express app per warm container
 src/
 ├── app.js                    # Express app: middleware, CORS, route mounting
-├── index.js                  # Entry point — connects to MongoDB, then app.listen()
-├── db/                       # Mongoose connection
+├── index.js                  # Traditional entry point — connects to MongoDB, then app.listen()
+├── db/                       # Mongoose connection (readyState-checked, reused across invocations)
 ├── routes/
 │   ├── content.routes.js     # Public GET + admin-only PUT per section
 │   └── admin.routes.js       # Admin register/login + ImageKit auth
@@ -104,6 +106,19 @@ No file ever touches this server's filesystem or memory — there's no Multer, n
 
 ## Deployment
 
-This is a traditional long-running Express server (`app.listen()` in `src/index.js`), not a serverless function — deploy it to a platform that runs a persistent Node process, e.g. **Render**, Railway, or Fly.io. It is not set up for Vercel (no `vercel.json`, no serverless handler export), and running it there would need restructuring plus care around Mongoose connection reuse across invocations.
+### Vercel
 
-Point the frontend's `VITE_API_URL` at the deployed URL (e.g. `https://your-backend.onrender.com/api/v1`), and set `CORS_ORIGIN` here to the deployed frontend's origin.
+`api/index.js` wraps the Express app as a serverless function, and `vercel.json` rewrites every path to it. Mongoose connection reuse is handled in `src/db/index.js` (checks `readyState` before reconnecting, so warm containers don't reopen a connection per request).
+
+1. Import the repo in Vercel (or run `vercel` from this directory).
+2. Add the environment variables listed below in the Vercel project settings (Production and Preview) — `.env` is not deployed.
+3. Set `NODE_ENV=production` so the auth cookie's `secure`/`sameSite` flags are correct for cross-origin requests.
+4. Deploy. All routes (`/`, `/api/v1/...`) are served through `api/index.js`.
+
+### Traditional Node host
+
+For a persistent Node process instead (e.g. **Render**, Railway, Fly.io), `src/index.js` still works as-is with `npm start` — it connects to MongoDB once at boot and calls `app.listen()`.
+
+---
+
+Point the frontend's `VITE_API_URL` at the deployed URL (e.g. `https://your-backend.vercel.app/api/v1`), and set `CORS_ORIGIN` here to the deployed frontend's origin.
