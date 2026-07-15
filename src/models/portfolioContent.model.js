@@ -79,6 +79,7 @@ const projectItemSchema = new Schema(
     slug: { type: String, default: "" },
     description: { type: String, default: "" },
     stack: { type: String, default: "" },
+    tag: { type: String, default: "" },
     coverImage: { type: String, default: "" },
     githubUrl: { type: String, default: "" },
     liveUrl: { type: String, default: "" },

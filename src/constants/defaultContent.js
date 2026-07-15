@@ -95,6 +95,7 @@ export const DEFAULT_CONTENT = {
         description:
           "Responsive travel-booking site with destinations, services, and testimonials, animated with GSAP — built during my Vidya Intern Hub internship.",
         stack: "React · Tailwind CSS · GSAP",
+        tag: "React",
         coverImage: "",
         githubUrl: "https://github.com/Sh-karan27/tour-and-travel-vidyahubintern",
         liveUrl: "https://tour-and-travel-vidyahubintern.vercel.app/",
